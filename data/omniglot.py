@@ -46,7 +46,6 @@ class Omniglot(Dataset):
         for ex in ds_np:
             _img = cv2.resize(ex["image"], (32, 32))
             self.data.append(_img)
-            self.data.append(ex["image"])
             self.targets.append(ex["label"])
             del _img
 
