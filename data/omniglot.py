@@ -38,7 +38,7 @@ class Omniglot(Dataset):
         if train:
             self.split = 'train'
         else:
-            self.split = 'val'
+            self.split = 'test'
         ds, info = tfds.load("omniglot", split=self.split, shuffle_files=True, with_info = True)
         ds_np = tfds.as_numpy(ds)
         self.classes = info.features["label"].names
