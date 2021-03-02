@@ -19,7 +19,7 @@ def contrastive_evaluate(val_loader, model, memory_bank):
     model.eval()
 
     for batch in val_loader:
-        images = batch['image'].cuda(non_blocking=True)
+        images = torch.from_numpy(batch['image']).cuda(non_blocking=True)
         target = batch['target'].cuda(non_blocking=True)
 
         output = model(images)
