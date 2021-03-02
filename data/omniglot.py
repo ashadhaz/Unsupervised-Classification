@@ -54,7 +54,7 @@ class Omniglot(Dataset):
             self.targets.append(ex["label"])
             del _img
             i+=1
-            if i == 100:
+            if i == 500:
                 break
 
         self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
