@@ -183,6 +183,10 @@ def get_val_dataset(p, transform=None, to_neighbors_dataset=False):
         from data.imagenet import ImageNetSubset
         subset_file = './data/imagenet_subsets/%s.txt' %(p['val_db_name'])
         dataset = ImageNetSubset(subset_file=subset_file, split='val', transform=transform)
+
+    elif p['val_db_name'] == 'omniglot':
+        from data.omniglot import Omniglot
+        dataset = Omniglot(train = False, transform = transform, download = True)
     
     else:
         raise ValueError('Invalid validation dataset {}'.format(p['val_db_name']))
