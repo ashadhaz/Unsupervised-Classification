@@ -10,6 +10,7 @@ from PIL import Image
 from torch.utils.data import Dataset
 from utils.mypath import MyPath
 from torchvision.datasets.utils import check_integrity, download_and_extract_archive
+import tensorflow_dataset as tfds
 
 
 class Omniglot(Dataset):
