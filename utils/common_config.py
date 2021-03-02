@@ -141,6 +141,10 @@ def get_train_dataset(p, transform, to_augmented_dataset=False,
         subset_file = './data/imagenet_subsets/%s.txt' %(p['train_db_name'])
         dataset = ImageNetSubset(subset_file=subset_file, split='train', transform=transform)
 
+    elif p['train_db_name'] == 'omniglot':
+        from data.omniglot import Omniglot
+        dataset = Omniglot(train = True, transform = transform, download = True)
+
     else:
         raise ValueError('Invalid train dataset {}'.format(p['train_db_name']))
     
