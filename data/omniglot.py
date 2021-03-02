@@ -45,7 +45,7 @@ class Omniglot(Dataset):
 
         self.data = []
         self.targets = []
-        i=0
+        #i=0
 
         # now load the picked numpy arrays
         for ex in ds_np:
@@ -53,9 +53,9 @@ class Omniglot(Dataset):
             self.data.append(_img)
             self.targets.append(ex["label"])
             del _img
-            i+=1
-            if i == 1000:
-                break
+            #i+=1
+            #if i == 1000:
+            #    break
 
         self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
         self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
