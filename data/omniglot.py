@@ -57,9 +57,6 @@ class Omniglot(Dataset):
             #if i == 1000:
             #    break
 
-        self.data = np.vstack(self.data).reshape(-1, 3, 32, 32)
-        self.data = self.data.transpose((0, 2, 3, 1))  # convert to HWC
-
     def __getitem__(self, index):
         """
         Args:
