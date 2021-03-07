@@ -20,8 +20,8 @@ def simclr_train(train_loader, model, criterion, optimizer, epoch):
     model.train()
 
     for i, batch in enumerate(train_loader):
-        images = batch['image']
-        images_augmented = batch['image_augmented']
+        images = torch.from_numpy(batch['image'])
+        images_augmented = torch.from_numpy(batch['image_augmented'])
         b, c, h, w = images.size()
         input_ = torch.cat([images.unsqueeze(1), images_augmented.unsqueeze(1)], dim=1)
         input_ = input_.view(-1, c, h, w) 
@@ -58,8 +58,8 @@ def scan_train(train_loader, model, criterion, optimizer, epoch, update_cluster_
 
     for i, batch in enumerate(train_loader):
         # Forward pass
-        anchors = batch['anchor'].cuda(non_blocking=True)
-        neighbors = batch['neighbor'].cuda(non_blocking=True)
+        anchors = torch.from_numpy(batch['anchor']).cuda(non_blocking=True)
+        neighbors = torch.from_numpy(batch['neighbor']).cuda(non_blocking=True)
        
         if update_cluster_head_only: # Only calculate gradient for backprop of linear layer
             with torch.no_grad():
@@ -106,8 +106,8 @@ def selflabel_train(train_loader, model, criterion, optimizer, epoch, ema=None):
     model.train()
 
     for i, batch in enumerate(train_loader):
-        images = batch['image'].cuda(non_blocking=True)
-        images_augmented = batch['image_augmented'].cuda(non_blocking=True)
+        images = torch.from_numpy(batch['image']).cuda(non_blocking=True)
+        images_augmented = torch.from_numpy(batch['image_augmented']).cuda(non_blocking=True)
 
         with torch.no_grad(): 
             output = model(images)[0]

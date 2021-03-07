@@ -19,7 +19,7 @@ def contrastive_evaluate(val_loader, model, memory_bank):
     model.eval()
 
     for batch in val_loader:
-        images = batch['image'].cuda(non_blocking=True)
+        images = torch.from_numpy(batch['image']).cuda(non_blocking=True)
         target = torch.from_numpy(batch['target']).cuda(non_blocking=True)
 
         output = model(images)
@@ -53,7 +53,7 @@ def get_predictions(p, dataloader, model, return_features=False):
 
     ptr = 0
     for batch in dataloader:
-        images = batch[key_].cuda(non_blocking=True)
+        images = torch.from_numpy(batch[key_]).cuda(non_blocking=True)
         bs = images.shape[0]
         res = model(images, forward_pass='return_all')
         output = res['output']
@@ -65,7 +65,7 @@ def get_predictions(p, dataloader, model, return_features=False):
             probs[i].append(F.softmax(output_i, dim=1))
         targets.append(torch.from_numpy(batch['target']))
         if include_neighbors:
-            neighbors.append(batch['possible_neighbors'])
+            neighbors.append(torch.from_numpy(batch['possible_neighbors']))
 
     predictions = [torch.cat(pred_, dim = 0).cpu() for pred_ in predictions]
     probs = [torch.cat(prob_, dim=0).cpu() for prob_ in probs]
