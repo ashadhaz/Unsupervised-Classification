@@ -36,7 +36,7 @@ class Omniglot(Dataset):
         self.transform = transform
         self.train = train  # training set or test set
         if train:
-            self.split = 'train'
+            self.split = 'small2'
         else:
             self.split = 'small1'
         ds, info = tfds.load("omniglot", split=self.split, shuffle_files=True, with_info = True)
@@ -71,7 +71,8 @@ class Omniglot(Dataset):
 
         if self.transform is not None:
             img = self.transform(img)
-
+        print("type after transormation of image in data class:")
+        print(type(img))
         out = {'image': img, 'target': target, 'meta': {'im_size': img_size, 'index': index, 'class_name': class_name}}
         
         return out

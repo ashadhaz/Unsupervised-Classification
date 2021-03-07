@@ -116,7 +116,8 @@ class CIFAR10(Dataset):
 
         if self.transform is not None:
             img = self.transform(img)
-
+        print("type after transormation of image in data class:")
+        print(type(img))
         out = {'image': img, 'target': target, 'meta': {'im_size': img_size, 'index': index, 'class_name': class_name}}
         
         return out
