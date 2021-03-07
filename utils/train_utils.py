@@ -20,8 +20,8 @@ def simclr_train(train_loader, model, criterion, optimizer, epoch):
     model.train()
 
     for i, batch in enumerate(train_loader):
-        images = torch.from_numpy(batch['image'])
-        images_augmented = torch.from_numpy(batch['image_augmented'])
+        images = batch['image']
+        images_augmented = batch['image_augmented']
         b, c, h, w = images.size()
         input_ = torch.cat([images.unsqueeze(1), images_augmented.unsqueeze(1)], dim=1)
         input_ = input_.view(-1, c, h, w) 
@@ -38,6 +38,7 @@ def simclr_train(train_loader, model, criterion, optimizer, epoch):
 
         if i % 25 == 0:
             progress.display(i)
+            print(type(images[0]))
 
 
 def scan_train(train_loader, model, criterion, optimizer, epoch, update_cluster_head_only=False):
