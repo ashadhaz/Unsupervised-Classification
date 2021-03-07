@@ -38,7 +38,7 @@ class Omniglot(Dataset):
         if train:
             self.split = 'train'
         else:
-            self.split = 'test'
+            self.split = 'small1'
         ds, info = tfds.load("omniglot", split=self.split, shuffle_files=True, with_info = True)
         ds_np = tfds.as_numpy(ds)
         self.classes = info.features["label"].names
@@ -49,10 +49,10 @@ class Omniglot(Dataset):
 
         # now load the picked numpy arrays
         for ex in ds_np:
-            _img = cv2.resize(ex["image"], (32, 32))
-            self.data.append(_img)
+            #_img = cv2.resize(ex["image"], (32, 32))
+            self.data.append(ex["image"])
             self.targets.append(ex["label"])
-            del _img
+            #del _img
             #i+=1
             #if i == 1000:
             #    break
