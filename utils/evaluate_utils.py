@@ -65,7 +65,7 @@ def get_predictions(p, dataloader, model, return_features=False):
             probs[i].append(F.softmax(output_i, dim=1))
         targets.append(torch.from_numpy(batch['target']))
         if include_neighbors:
-            neighbors.append(torch.from_numpy(batch['possible_neighbors']))
+            neighbors.append(batch['possible_neighbors'])
 
     predictions = [torch.cat(pred_, dim = 0).cpu() for pred_ in predictions]
     probs = [torch.cat(prob_, dim=0).cpu() for prob_ in probs]
