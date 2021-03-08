@@ -53,7 +53,7 @@ def get_predictions(p, dataloader, model, return_features=False):
 
     ptr = 0
     for batch in dataloader:
-        images = torch.from_numpy(batch[key_]).cuda(non_blocking=True)
+        images = batch[key_].cuda(non_blocking=True)
         bs = images.shape[0]
         res = model(images, forward_pass='return_all')
         output = res['output']
