@@ -21,7 +21,7 @@ def simclr_train(train_loader, model, criterion, optimizer, epoch):
 
     for i, batch in enumerate(train_loader):
         images = batch['image']
-        images_augmented = torch.from_numpy(batch['image_augmented'])
+        images_augmented = batch['image_augmented']
         b, c, h, w = images.size()
         input_ = torch.cat([images.unsqueeze(1), images_augmented.unsqueeze(1)], dim=1)
         input_ = input_.view(-1, c, h, w) 
@@ -106,8 +106,8 @@ def selflabel_train(train_loader, model, criterion, optimizer, epoch, ema=None):
     model.train()
 
     for i, batch in enumerate(train_loader):
-        images = torch.from_numpy(batch['image']).cuda(non_blocking=True)
-        images_augmented = torch.from_numpy(batch['image_augmented']).cuda(non_blocking=True)
+        images = batch['image'].cuda(non_blocking=True)
+        images_augmented = batch['image_augmented'].cuda(non_blocking=True)
 
         with torch.no_grad(): 
             output = model(images)[0]
