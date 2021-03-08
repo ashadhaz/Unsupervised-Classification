@@ -20,7 +20,7 @@ def simclr_train(train_loader, model, criterion, optimizer, epoch):
     model.train()
 
     for i, batch in enumerate(train_loader):
-        images = torch.from_numpy(batch['image'])
+        images = batch['image']
         images_augmented = torch.from_numpy(batch['image_augmented'])
         b, c, h, w = images.size()
         input_ = torch.cat([images.unsqueeze(1), images_augmented.unsqueeze(1)], dim=1)
