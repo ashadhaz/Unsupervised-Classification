@@ -12,6 +12,8 @@ from utils.evaluate_utils import get_predictions, hungarian_evaluate
 from utils.memory import MemoryBank 
 from utils.utils import fill_memory_bank
 from PIL import Image
+import matplotlib.pyplot as plt
+%matplotlib inline
 
 
 FLAGS = argparse.ArgumentParser(description='Evaluate models from the model zoo')
@@ -130,8 +132,7 @@ def get_prototypes(config, predictions, features, model, topk=10):
     return proto_indices
 
 def visualize_indices(indices, dataset, hungarian_match):
-    import matplotlib.pyplot as plt
-    %matplotlib inline
+    
     import numpy as np
 
     for idx in indices:
