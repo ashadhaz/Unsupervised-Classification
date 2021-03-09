@@ -83,6 +83,7 @@ def confusion_matrix(predictions, gt, class_names, output_file=None):
     axes.set_yticks([i for i in range(len(class_names))])
     axes.set_xticklabels(class_names, ha='right', fontsize=8, rotation=40)
     axes.set_yticklabels(class_names, ha='right', fontsize=8)
+    plt.legend()
     
     for (i, j), z in np.ndenumerate(confusion_matrix):
         axes.text(j, i, '%d' %(100*z), ha='center', va='center', color='white', fontsize=6)
