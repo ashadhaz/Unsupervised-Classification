@@ -85,11 +85,8 @@ def confusion_matrix(predictions, gt, class_names, output_file=None):
     axes.set_yticklabels(class_names, ha='right', fontsize=8)
     
     for (i, j), z in np.ndenumerate(confusion_matrix):
-        if i == j:
-            axes.text(j, i, '%d' %(100*z), ha='center', va='center', color='white', fontsize=6)
-        else:
-            pass
-
+        axes.text(j, i, '%d' %(100*z), ha='center', va='center', color='white', fontsize=6)
+        
     plt.tight_layout()
     if output_file is None:
         plt.show()
